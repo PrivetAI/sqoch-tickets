@@ -2,6 +2,19 @@
 
 React 19 + TypeScript + Vite, без UI-библиотек. Данные моковые, бэкенд эмулируется в памяти.
 
+## Демо
+
+![Запись экрана: оформление заказа](docs/demo.gif)
+
+[Запись в полном качестве (mp4)](docs/demo.mp4)
+
+Телефон, 390 px:
+
+<p>
+  <img src="docs/mobile-participants.png" width="280" alt="Шаг «Участники» на телефоне">
+  <img src="docs/mobile-review.png" width="280" alt="Шаг «Проверка» на телефоне">
+</p>
+
 ## Запуск
 
 ```bash
