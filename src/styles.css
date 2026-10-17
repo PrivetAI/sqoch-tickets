@@ -1,0 +1,594 @@
+:root {
+  --bg: #f4f2ee;
+  --surface: #ffffff;
+  --ink: #17162b;
+  --muted: #6b6980;
+  --line: #e3e0d9;
+  --accent: #3b2fd6;
+  --accent-ink: #ffffff;
+  --accent-soft: #ecebff;
+  --child: #0f7b5f;
+  --child-soft: #e2f5ee;
+  --danger: #c0262d;
+  --danger-soft: #fdecec;
+  --warn: #8a5a00;
+  --warn-soft: #fff4dc;
+  --radius: 14px;
+  --gutter: 16px;
+
+  color-scheme: light;
+  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif;
+  font-size: 16px;
+  line-height: 1.45;
+  color: var(--ink);
+  background: var(--bg);
+  -webkit-text-size-adjust: 100%;
+}
+
+* {
+  box-sizing: border-box;
+}
+
+body {
+  margin: 0;
+  min-width: 320px;
+  background: var(--bg);
+}
+
+h1,
+h2,
+h3,
+p {
+  margin: 0;
+}
+
+button,
+input {
+  font: inherit;
+  color: inherit;
+}
+
+button {
+  cursor: pointer;
+}
+
+button:disabled {
+  cursor: default;
+  opacity: 0.55;
+}
+
+:focus-visible {
+  outline: 3px solid color-mix(in srgb, var(--accent) 45%, transparent);
+  outline-offset: 2px;
+}
+
+.muted {
+  color: var(--muted);
+}
+
+.center {
+  text-align: center;
+}
+
+.pad {
+  margin-top: 48px;
+}
+
+.mono {
+  font-family: ui-monospace, 'SF Mono', Menlo, monospace;
+  letter-spacing: 0.04em;
+}
+
+/* ---------- Page ---------- */
+
+.page {
+  max-width: 980px;
+  margin: 0 auto;
+  padding: 24px var(--gutter) 48px;
+}
+
+.event {
+  margin-bottom: 24px;
+}
+
+.event__kicker {
+  font-size: 13px;
+  font-weight: 600;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: var(--accent);
+  margin-bottom: 6px;
+}
+
+.event h1 {
+  font-size: clamp(24px, 5vw, 34px);
+  line-height: 1.15;
+  letter-spacing: -0.01em;
+  margin-bottom: 6px;
+}
+
+.layout {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) 300px;
+  gap: 24px;
+  align-items: start;
+}
+
+.layout--single {
+  grid-template-columns: minmax(0, 640px);
+}
+
+.layout__aside {
+  position: sticky;
+  top: 16px;
+}
+
+.layout__aside h3 {
+  margin-bottom: 12px;
+}
+
+/* На десктопе итог уже есть в боковой панели. */
+.layout:not(.layout--single) .step-footer__total {
+  display: none;
+}
+
+/* ---------- Stepper ---------- */
+
+.stepper {
+  display: flex;
+  gap: 8px;
+  list-style: none;
+  padding: 0;
+  margin: 0 0 20px;
+  font-size: 14px;
+  color: var(--muted);
+}
+
+.stepper li {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  flex: 1;
+  padding-bottom: 10px;
+  border-bottom: 3px solid var(--line);
+}
+
+.stepper .is-current {
+  color: var(--ink);
+  font-weight: 600;
+  border-color: var(--accent);
+}
+
+.stepper .is-done {
+  border-color: color-mix(in srgb, var(--accent) 40%, var(--line));
+}
+
+.stepper__num {
+  display: inline-grid;
+  place-items: center;
+  width: 22px;
+  height: 22px;
+  border-radius: 50%;
+  font-size: 12px;
+  background: var(--line);
+  color: var(--ink);
+  flex: none;
+}
+
+.is-current .stepper__num,
+.is-done .stepper__num {
+  background: var(--accent);
+  color: var(--accent-ink);
+}
+
+/* ---------- Step ---------- */
+
+.step {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+}
+
+.step__head h2 {
+  font-size: 22px;
+  margin-bottom: 4px;
+}
+
+.card {
+  background: var(--surface);
+  border: 1px solid var(--line);
+  border-radius: var(--radius);
+  padding: 16px;
+}
+
+.card__head {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 12px;
+  margin-bottom: 8px;
+}
+
+.card h3 {
+  font-size: 16px;
+}
+
+.email {
+  word-break: break-all;
+}
+
+/* ---------- Participants ---------- */
+
+.participants {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+
+.participant__head {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  margin-bottom: 12px;
+  min-height: 28px;
+}
+
+.participant__remove {
+  margin-left: auto;
+}
+
+.participant__fields {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) 96px;
+  gap: 12px;
+  align-items: start;
+}
+
+.badge {
+  font-size: 12px;
+  font-weight: 600;
+  padding: 3px 8px;
+  border-radius: 999px;
+  white-space: nowrap;
+  background: var(--accent-soft);
+  color: var(--accent);
+}
+
+.badge--child {
+  background: var(--child-soft);
+  color: var(--child);
+}
+
+/* ---------- Field ---------- */
+
+.field {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+  min-width: 0;
+}
+
+.field label {
+  font-size: 13px;
+  font-weight: 600;
+}
+
+.field input {
+  width: 100%;
+  height: 46px;
+  padding: 0 12px;
+  border: 1px solid var(--line);
+  border-radius: 10px;
+  background: var(--surface);
+  font-size: 16px; /* меньше 16px — iOS зумит страницу при фокусе */
+}
+
+.field input:focus {
+  border-color: var(--accent);
+  outline: none;
+  box-shadow: 0 0 0 3px var(--accent-soft);
+}
+
+.field__note {
+  font-size: 13px;
+  color: var(--muted);
+}
+
+.field--error input {
+  border-color: var(--danger);
+}
+
+.field--error .field__note {
+  color: var(--danger);
+}
+
+/* ---------- Summary ---------- */
+
+.summary__lines {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+}
+
+.summary__lines li {
+  display: flex;
+  justify-content: space-between;
+  gap: 12px;
+  padding: 8px 0;
+  border-bottom: 1px dashed var(--line);
+}
+
+.summary__who {
+  display: flex;
+  flex-direction: column;
+  min-width: 0;
+  overflow-wrap: anywhere;
+}
+
+.summary__who small {
+  color: var(--muted);
+  font-size: 13px;
+}
+
+.summary__total {
+  display: flex;
+  justify-content: space-between;
+  align-items: baseline;
+  gap: 12px;
+  padding-top: 12px;
+}
+
+.summary__total strong {
+  font-size: 20px;
+}
+
+/* ---------- Buttons ---------- */
+
+.btn {
+  height: 48px;
+  padding: 0 20px;
+  border-radius: 12px;
+  border: 1px solid transparent;
+  font-weight: 600;
+  white-space: nowrap;
+}
+
+.btn--primary {
+  background: var(--accent);
+  color: var(--accent-ink);
+}
+
+.btn--primary:not(:disabled):hover {
+  background: color-mix(in srgb, var(--accent) 88%, black);
+}
+
+.btn--ghost {
+  background: var(--surface);
+  border-color: var(--line);
+}
+
+.btn--ghost:not(:disabled):hover {
+  border-color: var(--accent);
+}
+
+.btn--block {
+  width: 100%;
+}
+
+.btn--small {
+  height: 38px;
+  padding: 0 14px;
+  margin-top: 10px;
+  font-size: 14px;
+}
+
+.link-btn {
+  background: none;
+  border: none;
+  padding: 4px 0;
+  color: var(--accent);
+  font-weight: 600;
+  font-size: 14px;
+}
+
+.link-btn:not(:disabled):hover {
+  text-decoration: underline;
+}
+
+/* ---------- Notices ---------- */
+
+.notice {
+  padding: 12px 14px;
+  border-radius: 12px;
+  font-size: 14px;
+}
+
+.notice p + p {
+  margin-top: 6px;
+}
+
+.notice--error {
+  background: var(--danger-soft);
+  color: var(--danger);
+}
+
+.notice--warn {
+  background: var(--warn-soft);
+  color: var(--warn);
+}
+
+/* ---------- Footer ---------- */
+
+.step-footer {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 12px;
+  padding-top: 8px;
+}
+
+.step-footer__total {
+  display: flex;
+  flex-direction: column;
+  line-height: 1.2;
+}
+
+.step-footer__total small {
+  color: var(--muted);
+  font-size: 13px;
+}
+
+.step-footer__total strong {
+  font-size: 20px;
+}
+
+.step-footer__actions {
+  display: flex;
+  gap: 8px;
+  margin-left: auto;
+}
+
+/* ---------- Result ---------- */
+
+.result {
+  align-items: stretch;
+  text-align: center;
+}
+
+.result__icon {
+  width: 64px;
+  height: 64px;
+  margin: 8px auto 0;
+  border-radius: 50%;
+  display: grid;
+  place-items: center;
+  font-size: 30px;
+  background: var(--child-soft);
+  color: var(--child);
+}
+
+.result h2 {
+  font-size: 26px;
+}
+
+.ticket {
+  text-align: left;
+  border-top: 6px solid var(--accent);
+}
+
+.ticket h3 {
+  margin-bottom: 4px;
+}
+
+.ticket .summary {
+  margin-top: 12px;
+}
+
+/* ---------- Demo panel ---------- */
+
+.demo {
+  background: var(--ink);
+  color: #fff;
+  font-size: 14px;
+}
+
+.demo summary {
+  max-width: 980px;
+  margin: 0 auto;
+  padding: 10px var(--gutter);
+  cursor: pointer;
+  user-select: none;
+}
+
+.demo summary strong {
+  color: #ffd166;
+}
+
+.demo__body {
+  max-width: 980px;
+  margin: 0 auto;
+  padding: 0 var(--gutter) 12px;
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+  align-items: center;
+}
+
+.demo button {
+  height: 34px;
+  padding: 0 12px;
+  border-radius: 8px;
+  border: 1px solid rgb(255 255 255 / 0.25);
+  background: rgb(255 255 255 / 0.08);
+  color: #fff;
+}
+
+.demo button:hover {
+  background: rgb(255 255 255 / 0.18);
+}
+
+.demo__stepper {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.demo__stepper button {
+  width: 34px;
+  padding: 0;
+}
+
+.demo__stepper span {
+  min-width: 2ch;
+  text-align: center;
+  font-variant-numeric: tabular-nums;
+}
+
+/* ---------- Mobile ---------- */
+
+@media (max-width: 760px) {
+  .layout,
+  .layout--single {
+    grid-template-columns: minmax(0, 1fr);
+  }
+
+  .layout__aside {
+    display: none;
+  }
+
+  .layout:not(.layout--single) .step-footer__total {
+    display: flex;
+  }
+
+  /* Итог и кнопка всегда под пальцем. */
+  .step-footer {
+    position: sticky;
+    bottom: 0;
+    margin: 0 calc(-1 * var(--gutter)) -48px;
+    padding: 12px var(--gutter) calc(12px + env(safe-area-inset-bottom));
+    background: color-mix(in srgb, var(--bg) 92%, transparent);
+    backdrop-filter: blur(8px);
+    border-top: 1px solid var(--line);
+  }
+
+  .stepper {
+    font-size: 13px;
+  }
+}
+
+@media (max-width: 400px) {
+  .participant__fields {
+    grid-template-columns: minmax(0, 1fr) 80px;
+  }
+
+  .btn {
+    padding: 0 16px;
+  }
+
+  .stepper li {
+    gap: 6px;
+  }
+}
